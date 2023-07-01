@@ -26,6 +26,19 @@ class MentorService {
         },
       },
     });
+
+    const matchingCourses = await prisma.course.findMany({
+      where: {
+        skills: {
+          some: {
+            name: {
+              in: skills.map((skill) => skill.name),
+            },
+          },
+        },
+      },
+    });
+
     return prisma.mentor.create({
       data: {
         name,
@@ -38,6 +51,14 @@ class MentorService {
         skills: {
           connect: dbSkills.map((skill) => ({ id: skill.id })),
         },
+        courses: {
+          connect: matchingCourses.map((matchedCourse) => ({
+            id: matchedCourse.id,
+          })),
+        },
+      },
+      include: {
+        courses: true,
       },
     });
   }

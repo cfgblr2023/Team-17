@@ -25,6 +25,7 @@ model Course {
   coordinator   Coordinator @relation(fields: [coordinatorId], references: [id])
   coordinatorId String
   modules       Module[]
+  mentors       Mentor[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }
@@ -59,6 +60,7 @@ model Mentor {
   available          Boolean
   languagesSpoken    Language[]
   skills             Skill[]
+  courses            Course[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
