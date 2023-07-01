@@ -83,6 +83,11 @@ const useStyles = makeStyles((theme) => ({
     const emptyStars = emptyStar.repeat(starCount - ratings);
     return filledStars + emptyStars;
   }
+
+  function handleReassignMentor() {
+    console.log("Reassign Mentor button clicked");
+  }  
+  
 function Coordinator() {
     const skillsList = [
         "HTML",
@@ -292,6 +297,37 @@ function Coordinator() {
     <TableCell>
       {getStarRating(data.ratings)} {/* Call a helper function to convert ratings to stars */}
     </TableCell>
+  </TableRow>
+))}
+    </TableBody>
+  </Table>
+</TableContainer>
+</div>
+<div className ="table">
+      <TableContainer>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Mentee</TableCell>
+        <TableCell>Issue</TableCell>
+        <TableCell> Reassign Mentor</TableCell>
+        {/* <Button variant="contained" color="primary" onClick={handleReassignMentor}>
+        Reassign Mentor */}
+      {/* </Button> */}
+    
+      </TableRow>
+    </TableHead>
+    <TableBody>
+    {staticJsonData.map((data, index) => (
+  <TableRow key={index}>
+    <TableCell>Jai</TableCell>
+    <TableCell>Unable to understand the topic</TableCell>
+    <TableCell>
+        <Button variant="contained" color="primary" onClick={handleReassignMentor}>
+        Reassign Mentor 
+       </Button>
+       </TableCell>
+    
   </TableRow>
 ))}
     </TableBody>
