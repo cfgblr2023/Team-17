@@ -31,16 +31,15 @@ const staticJsonData = [
       mentee: "Jane Smith",
       courses: "Web Development",
       progress: 80,
-      feedback: "Excellent",
+      ratings: 5, // Updated field name and converted feedback to ratings
     },
     {
       mentor: "Alice Johnson",
       mentee: "Bob Williams",
       courses: "Data Science",
       progress: 60,
-      feedback: "Good",
+      ratings: 4, // Updated field name and converted feedback to ratings
     },
-    // Add more data as needed
   ];
 
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +75,14 @@ const useStyles = makeStyles((theme) => ({
         width: "fit-content",
       },
   }));
-
+  function getStarRating(ratings) {
+    const starCount = 5; // Maximum star count
+    const filledStar = "★";
+    const emptyStar = "☆";
+    const filledStars = filledStar.repeat(ratings);
+    const emptyStars = emptyStar.repeat(starCount - ratings);
+    return filledStars + emptyStars;
+  }
 function Coordinator() {
     const skillsList = [
         "HTML",
@@ -91,6 +97,10 @@ function Coordinator() {
 
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState("software development");
+    const [module1,setModule1]=useState("module1 content");
+    const [module2,setModule2]=useState("module2 content");
+    const [module3,setModule3]=useState("module3 content");
+    const [module4,setModule4]=useState("module4 content");
     const [duration, setDuration] = useState("2");
     const [skills, setSkills] = useState([]);
     const [openSkill, setOpenSkill] = useState(false);
@@ -141,7 +151,7 @@ function Coordinator() {
                 Help
               </Button>
               <Button variant="text" className={classes.menuItem} onClick={handleClickOpen}>
-                Add Cources
+                Add Courses
               </Button>
         </Toolbar>
       </AppBar>
@@ -155,10 +165,10 @@ function Coordinator() {
           },
         }}
       >
-        <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>Add Cource</DialogTitle>
+        <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>Add Course</DialogTitle>
         <DialogContent>
           <DialogContentText style={{ textAlign: "center" }}>
-            Add Cource
+            Add Course
           </DialogContentText>
           <form className={classes.form} noValidate>
             <TextField
@@ -180,9 +190,50 @@ function Coordinator() {
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="module1"
+              label="Module1"
+              type="text"
+              fullWidth
+              value={module1}
+              onChange={(e) => setModule1(e.target.value)}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="module2"
+              label="Module2"
+              type="text"
+              fullWidth
+              value={module2}
+              onChange={(e) => setModule2(e.target.value)}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="module3"
+              label="Module3"
+              type="text"
+              fullWidth
+              value={module3}
+              onChange={(e) => setModule3(e.target.value)}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="module4"
+              label="Module4"
+              type="text"
+              fullWidth
+              value={module4}
+              onChange={(e) => setModule4(e.target.value)}
+            />
             <Button variant="contained" onClick={handleSkillsPopup}>
             Select Skills
           </Button>
+
           </form>
         </DialogContent>
         <Dialog open={openSkill} onClose={handleCloseSkill}>
@@ -226,21 +277,23 @@ function Coordinator() {
         <TableCell>Mentee</TableCell>
         <TableCell>Courses</TableCell>
         <TableCell>Progress</TableCell>
-        <TableCell>Feedback</TableCell>
+        <TableCell>Ratings</TableCell>
       </TableRow>
     </TableHead>
     <TableBody>
-      {staticJsonData.map((data, index) => (
-        <TableRow key={index}>
-          <TableCell>{data.mentor}</TableCell>
-          <TableCell>{data.mentee}</TableCell>
-          <TableCell>{data.courses}</TableCell>
-          <TableCell>
-            <LinearProgress variant="determinate" value={data.progress} />
-          </TableCell>
-          <TableCell>{data.feedback}</TableCell>
-        </TableRow>
-      ))}
+    {staticJsonData.map((data, index) => (
+  <TableRow key={index}>
+    <TableCell>{data.mentor}</TableCell>
+    <TableCell>{data.mentee}</TableCell>
+    <TableCell>{data.courses}</TableCell>
+    <TableCell>
+      <LinearProgress variant="determinate" value={data.progress} />
+    </TableCell>
+    <TableCell>
+      {getStarRating(data.ratings)} {/* Call a helper function to convert ratings to stars */}
+    </TableCell>
+  </TableRow>
+))}
     </TableBody>
   </Table>
 </TableContainer>
