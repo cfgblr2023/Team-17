@@ -11,7 +11,39 @@ datasource db {
 }
 
 model Coordinator {
-  id    String @id @default(uuid())
-  name  String
-  email String @unique
+  id      String   @id @default(uuid())
+  name    String
+  email   String   @unique
+  courses Course[]
+}
+
+model Course {
+  id            String      @id @default(uuid())
+  title         String
+  duration      Int
+  skills        Skill[]
+  coordinator   Coordinator @relation(fields: [coordinatorId], references: [id])
+  coordinatorId String
+}
+
+model Skill {
+  id       String @id @default(uuid())
+  name     String
+  course   Course @relation(fields: [courseId], references: [id])
+  courseId String
+}
+
+model Mentor {
+  id              String     @id @default(uuid())
+  name            String
+  phoneNumber     String
+  gender          String
+  languagesSpoken Language[]
+}
+
+model Language {
+  id       String  @id @default(uuid())
+  language String
+  Mentor   Mentor? @relation(fields: [mentorId], references: [id])
+  mentorId String?
 }
