@@ -48,63 +48,81 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
-function MenteeNav() {
-
+  function MenteeNav() {
     const classes = useStyles();
-
+  
+    // State variables for the two dialogs
+    const [profileOpen, setProfileOpen] = useState(false);
+    const [ticketOpen, setTicketOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("John Doe");
     const [email, setEmail] = useState("john.doe@example.com");
     const [age, setAge] = useState("25");
     const [interests, setInterests] = useState("Programming, Photography");
     const [mentor, setMentor] = useState("Jane Smith");
-
-    const handleEdit = () => {
-        setOpen(true);
-      };
-    
-      const handleSave = () => {
-        setOpen(false);
-      };
-    const handleClickOpen = () => {
-      setOpen(true);
+  
+    // Functions to handle the open and close of each dialog
+    const handleProfileOpen = () => {
+      setProfileOpen(true);
     };
-
-    const handleClose = () => {
-      setOpen(false);
+    const handleProfileClose = () => {
+      setProfileOpen(false);
     };
-
-  return (
-    <div>
+    const handleTicketOpen = () => {
+      setTicketOpen(true);
+    };
+    const handleTicketClose = () => {
+      setTicketOpen(false);
+    };
+  
+    // Rest of the component code
+  
+    return (
+      <div>
         <AppBar position="static" className={classes.appBar}>
-      <Toolbar className={classes.toolbar}>
-          <img className={classes.logo} src={logo} alt="Logo" />
-          <Typography variant="h6" className={classes.title}>
-            My Website
-          </Typography>
-          <Button variant="text" className={classes.menuItem}>
-                Forum
-              </Button>
-              <Button variant="text" className={classes.menuItem}>
-                Help
-              </Button>
-              <Button variant="text" className={classes.menuItem} onClick={handleClickOpen}>
-                My Profile
-              </Button>
-        </Toolbar>
-      </AppBar>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-        PaperProps={{
-          style: {
-            minWidth: 500, // set the desired width here
-          },
-        }}
-      >
-        <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>My Profile</DialogTitle>
-        <DialogContent>
+          <Toolbar className={classes.toolbar}>
+            <img className={classes.logo} src={logo} alt="Logo" />
+            <Typography variant="h6" className={classes.title}>
+              My Website
+            </Typography>
+            <Button variant="text" className={classes.menuItem}>
+              Forum
+            </Button>
+            <Button variant="text" className={classes.menuItem}>
+              Help
+            </Button>
+            <Button
+              variant="text"
+              className={classes.menuItem}
+              onClick={handleProfileOpen}
+            >
+              My Profile
+            </Button>
+            <Button
+              variant="text"
+              className={classes.menuItem}
+              onClick={handleTicketOpen}
+            >
+              Raise Ticket
+            </Button>
+          </Toolbar>
+        </AppBar>
+  
+        {/* Profile Dialog */}
+        <Dialog
+          open={profileOpen}
+          onClose={handleProfileClose}
+          aria-labelledby="form-dialog-title"
+          PaperProps={{
+            style: {
+              minWidth: 500, // set the desired width here
+            },
+          }}
+        >
+          <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
+            My Profile
+          </DialogTitle>
+          <DialogContent>
           <DialogContentText style={{ textAlign: "center" }}>
             Edit your details here
           </DialogContentText>
@@ -157,17 +175,55 @@ function MenteeNav() {
             />
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSave} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  )
-}
+          <DialogActions>
+            <Button onClick={handleProfileClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleProfileClose} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
+  
+        {/* Ticket Dialog */}
+        <Dialog
+          open={ticketOpen}
+          onClose={handleTicketClose}
+          aria-labelledby="form-dialog-title"
+          PaperProps={{
+            style: {
+              minWidth: 500, // set the desired width here
+            },
+          }}
+        >
+          <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
+            Raise a Ticket
+          </DialogTitle>
+          <DialogContent>
+            {/* Rest of the ticket dialog content */}
+            <DialogContentText>
+      Do you want to reassign your mentor? If yes, please enter the reason:
+    </DialogContentText>
+    <TextField
+      autoFocus
+      margin="dense"
+      id="mentor-reassign-reason"
+      label="Reason for reassignment"
+      type="text"
+      fullWidth
+    />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleTicketClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleTicketClose} color="primary">
+              Submit
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
 
 export default MenteeNav;
