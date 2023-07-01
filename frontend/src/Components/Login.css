@@ -1,19 +1,10 @@
-* {
-  margin: 0;
-  padding: 10px;
-}
-
-body {
-  background-color: white;
-}
-
-.logo {
+.logo1 {
   flex-direction: column;
   display: inline-block;
   margin-top: 25px;
 }
 
-.container {
+.container1 {
   width: 25%;
   margin-left: auto;
   margin-right: auto;
@@ -32,9 +23,11 @@ body {
   font: normal 15px verdana;
 }
 
-input[type="email"],
-input[type="password"] {
+
+.ema {
   width: 90%;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 #signin {
@@ -42,6 +35,8 @@ input[type="password"] {
   font: bold 15px verdana;
   width: 92%;
   margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 #signin:hover {
