@@ -24,12 +24,22 @@ model Course {
   skills        Skill[]
   coordinator   Coordinator @relation(fields: [coordinatorId], references: [id])
   coordinatorId String
+  modules       Module[]
+}
+
+model Module {
+  id       String @id @default(uuid())
+  name     String
+  duration Int
+
+  Course   Course @relation(fields: [courseId], references: [id])
+  courseId String
 }
 
 model Skill {
   id       String @id @default(uuid())
   name     String
-  course   Course @relation(fields: [courseId], references: [id])
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId String
 }
 
