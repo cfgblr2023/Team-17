@@ -25,6 +25,8 @@ model Course {
   coordinator   Coordinator @relation(fields: [coordinatorId], references: [id])
   coordinatorId String
   modules       Module[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 }
 
 model Module {
@@ -32,28 +34,38 @@ model Module {
   name     String
   duration Int
 
-  Course   Course @relation(fields: [courseId], references: [id])
-  courseId String
+  Course    Course   @relation(fields: [courseId], references: [id])
+  courseId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Skill {
-  id       String @id @default(uuid())
-  name     String
-  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id       String   @id @default(uuid())
+  name     String   @unique
+  course   Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId String
+  mentor   Mentor[]
 }
 
 model Mentor {
-  id              String     @id @default(uuid())
-  name            String
-  phoneNumber     String
-  gender          String
-  languagesSpoken Language[]
+  id                 String     @id @default(uuid())
+  name               String
+  email              String
+  password           String
+  phoneNumber        String
+  qualification      String
+  institutionWorking String
+  available          Boolean
+  languagesSpoken    Language[]
+  skills             Skill[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Language {
-  id       String  @id @default(uuid())
+  id       String   @id @default(uuid())
   language String
-  Mentor   Mentor? @relation(fields: [mentorId], references: [id])
-  mentorId String?
+  mentor   Mentor[]
 }
