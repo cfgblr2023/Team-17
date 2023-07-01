@@ -11,10 +11,11 @@ datasource db {
 }
 
 model Coordinator {
-  id      String   @id @default(uuid())
-  name    String
-  email   String   @unique
-  courses Course[]
+  id       String   @id @default(uuid())
+  name     String
+  email    String   @unique
+  password String
+  courses  Course[]
 }
 
 model Course {
@@ -53,7 +54,7 @@ model Skill {
 model Mentor {
   id                 String     @id @default(uuid())
   name               String
-  email              String
+  email              String     @unique
   password           String
   phoneNumber        String
   qualification      String
@@ -77,7 +78,7 @@ model Language {
 model Mentee {
   id                  String @id @default(uuid())
   name                String
-  email               String
+  email               String @unique
   password            String
   phoneNumber         String
   institutionStudying String

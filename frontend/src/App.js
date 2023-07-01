@@ -7,6 +7,7 @@ import Register from './Components/Register';
 import Mentee from './Components/Mentee';
 import Coordinator from './Components/Coordinator';
 import Mentor from './Components/Mentor';
+import RecommendedCourses from "./Components/RecommendedCourses";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/mentee" element={<Mentee />} />
             <Route exact path="/mentor" element={<Mentor />} />
             <Route exact path="/Coordinator" element={<Coordinator />} />
+            <Route exact path="/recommendedcourses" element={<RecommendedCourses />} />
           </Routes>
         </BrowserRouter>
     </div>
