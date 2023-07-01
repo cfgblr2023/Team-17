@@ -1,0 +1,44 @@
+.logo1 {
+  flex-direction: column;
+  display: inline-block;
+  margin-top: 25px;
+}
+
+.container1 {
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  box-shadow: 1px 2px 2px 2px rgb(0, 0, 0);
+}
+
+.login {
+  display: inline-block;
+  font: bold 30px helvetica;
+  text-decoration: underline;
+}
+
+.email,
+.password {
+  font: normal 15px verdana;
+}
+
+
+.ema {
+  width: 90%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+#signin {
+  background-color: #F6C66D;
+  font: bold 15px verdana;
+  width: 92%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+#signin:hover {
+  background-color: #E0B207;
+}

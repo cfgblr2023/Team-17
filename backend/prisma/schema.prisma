@@ -11,10 +11,11 @@ datasource db {
 }
 
 model Coordinator {
-  id      String   @id @default(uuid())
-  name    String
-  email   String   @unique
-  courses Course[]
+  id       String   @id @default(uuid())
+  name     String
+  email    String   @unique
+  password String
+  courses  Course[]
 }
 
 model Course {
@@ -47,12 +48,13 @@ model Skill {
   course   Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId String
   mentor   Mentor[]
+  mentee   Mentee[]
 }
 
 model Mentor {
   id                 String     @id @default(uuid())
   name               String
-  email              String
+  email              String     @unique
   password           String
   phoneNumber        String
   qualification      String
@@ -68,6 +70,23 @@ model Mentor {
 
 model Language {
   id       String   @id @default(uuid())
-  language String
+  language String   @unique
   mentor   Mentor[]
+  mentee   Mentee[]
+}
+
+model Mentee {
+  id                  String @id @default(uuid())
+  name                String
+  email               String @unique
+  password            String
+  phoneNumber         String
+  institutionStudying String
+  eduactionalStatus   String
+
+  languagesSpoken Language[]
+  areaOfInterest  Skill[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
