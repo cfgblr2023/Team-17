@@ -4,8 +4,9 @@ import React from "react";
 import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
-import Mentee from './Components/Mentee';
 import MenteeCalendar from "./Components/MenteeCalender";
+import Mentee from './Components/MenteeNav';
+import Coordinator from './Components/Coordinator';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/mentee" element={<Mentee />} />
             <Route exact path="/menteecal" element={<MenteeCalendar />} />
+            <Route exact path="/Coordinator" element={<Coordinator />} />
           </Routes>
         </BrowserRouter>
     </div>
