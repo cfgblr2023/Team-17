@@ -7,6 +7,7 @@ import Register from './Components/Register';
 import MenteeCalendar from "./Components/MenteeCalender";
 import Mentee from './Components/Mentee';
 import Coordinator from './Components/Coordinator';
+import RecommendedCourses from "./Components/RecommendedCourses";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/mentee" element={<Mentee />} />
             <Route exact path="/menteecal" element={<MenteeCalendar />} />
             <Route exact path="/Coordinator" element={<Coordinator />} />
+            <Route exact path="/recommendedcourses" element={<RecommendedCourses />} />
           </Routes>
         </BrowserRouter>
     </div>
