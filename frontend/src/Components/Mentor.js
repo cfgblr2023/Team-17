@@ -7,7 +7,6 @@ import Switch from '@material-ui/core/Switch';
 import MentorNav from './MentorNav';
 import MenteeCalender from './MenteeCalender';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -16,10 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     marginBottom: theme.spacing(3),
+    marginTop: theme.spacing(2),
   },
   videoContainer: {
     position: 'relative',
-    paddingBottom: '56.25%',
+    paddingBottom: '30%', // Adjust this value to make the video smaller or larger
     paddingTop: theme.spacing(3),
     height: 0,
     overflow: 'hidden',
@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: '100%',
+    paddingLeft: '17%',
+    width: '70%',
     height: '100%',
     border: 'none',
   },
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 function Mentor() {
   const classes = useStyles();
   const [showVideo, setShowVideo] = useState(false);
+  const assignedMentee = 'John Doe'; // Replace with your logic to get the assigned mentee
 
   const handleVideoToggle = (event) => {
     setShowVideo(event.target.checked);
@@ -46,40 +48,48 @@ function Mentor() {
     <div>
       <MentorNav />
       <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Typography variant="h4" className={classes.heading}>
-              You are assigned to xyz mentee
-            </Typography>
-            <Typography variant="body1">
-              Do you want training videos for the course?
-              <Switch
-                checked={showVideo}
-                onChange={handleVideoToggle}
-                color="primary"
-                name="showVideoToggle"
-              />
-            </Typography>
-          </Grid>
-          {showVideo && (
+        {assignedMentee ? (
+          <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Paper className={classes.videoContainer}>
-                <iframe 
-                  className={classes.video}
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                  title="Training Video" 
-                  frameborder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen
-                ></iframe>
-              </Paper>
+              <Typography variant="h4" className={classes.heading}>
+                You are assigned to {assignedMentee}
+              </Typography>
+              <Typography variant="body1">
+                Do you want training videos for the course?
+                <Switch
+                  checked={showVideo}
+                  onChange={handleVideoToggle}
+                  color="primary"
+                  name="showVideoToggle"
+                />
+              </Typography>
             </Grid>
-          )}
-        </Grid>
-        <Typography variant="h5" className={classes.heading} style={{marginTop: '20px'}}>
-            My Schedule
-        </Typography>
-        <MenteeCalender/>
+            {showVideo && (
+              <Grid item xs={12}>
+                <Paper className={classes.videoContainer}>
+                  <iframe 
+                    className={classes.video}
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Training Video" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                  ></iframe>
+                </Paper>
+              </Grid>
+            )}
+            <Grid item xs={12}>
+              <Typography variant="h5" className={classes.heading} style={{marginTop: '20px'}}>
+                My Schedule
+              </Typography>
+            </Grid>
+            <MenteeCalender/>
+          </Grid>
+        ) : (
+          <Typography variant="h4" className={classes.heading}>
+            You are not assigned to anyone yet
+          </Typography>
+        )}
       </div>
     </div>
   );
