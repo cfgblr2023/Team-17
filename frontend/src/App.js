@@ -5,7 +5,7 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import MenteeCalendar from "./Components/MenteeCalender";
-import Mentee from './Components/MenteeNav';
+import Mentee from './Components/Mentee';
 import Coordinator from './Components/Coordinator';
 
 function App() {

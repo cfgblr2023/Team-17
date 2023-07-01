@@ -4,7 +4,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { Typography, Box, Grid } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
 import MenteeCalender from './MenteeCalender';
-
+import '../Components/Mentee.css';
 
 const courseInfo = {
   courseName: 'Introduction to React',
@@ -24,9 +24,10 @@ function Mentee() {
   return (
     <div>
     <MenteeNav />
-   
-    <MenteeCalender/>
-
+    <div className="cal">
+      <MenteeCalender/>
+    </div>
+    <div className="textt">
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <Box bgcolor="background.paper" p={2} m={2} className={classes.box}>
@@ -48,7 +49,7 @@ function Mentee() {
         </Box>
       </Grid>
     </Grid>
-    
+    </div>
     </div>
   );
 }
