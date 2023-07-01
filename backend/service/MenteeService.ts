@@ -58,5 +58,61 @@ class MenteeService {
       },
     });
   }
+
+  async recommendCourses(menteeId: string) {
+    const mentee = await prisma.mentee.findUnique({
+      where: { id: menteeId },
+      include: { areaOfInterest: true, languagesSpoken: true },
+    });
+
+    if (!mentee) return [];
+
+    let recommendedCourses = await prisma.course.findMany({
+      where: {
+        skills: {
+          some: {
+            name: {
+              in: mentee.areaOfInterest.map((interest) => interest.name),
+            },
+          },
+        },
+        mentors: {
+          some: {
+            languagesSpoken: {
+              some: {
+                language: {
+                  in: mentee.languagesSpoken.map(
+                    (language) => language.language
+                  ),
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (recommendedCourses.length === 0) {
+      recommendedCourses = await prisma.course.findMany({
+        where: {
+          mentors: {
+            some: {
+              languagesSpoken: {
+                some: {
+                  language: {
+                    in: mentee.languagesSpoken.map(
+                      (language) => language.language
+                    ),
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+    }
+
+    return recommendedCourses;
+  }
 }
 export default MenteeService;

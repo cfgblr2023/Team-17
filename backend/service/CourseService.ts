@@ -20,8 +20,11 @@ class CourseService {
           duration,
           coordinator: { connect: { id: coordinatorId } },
           skills: {
-            create: skills.map((skill: { name: string }) => ({
-              name: skill.name,
+            connectOrCreate: skills.map((skill) => ({
+              where: { name: skill.name },
+              create: {
+                name: skill.name,
+              },
             })),
           },
           modules: {
