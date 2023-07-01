@@ -8,9 +8,10 @@ class CourseService {
     title: string;
     duration: number;
     skills: { name: string }[];
+    modules: { name: string; duration: number }[];
     coordinatorId: string;
   }) {
-    const { title, duration, skills, coordinatorId } = course;
+    const { title, duration, skills, modules, coordinatorId } = course;
 
     try {
       const course = await prisma.course.create({
@@ -23,13 +24,18 @@ class CourseService {
               name: skill.name,
             })),
           },
+          modules: {
+            create: modules.map((m) => ({
+              name: m.name,
+              duration: m.duration,
+            })),
+          },
         },
         include: {
           skills: true,
           coordinator: true,
         },
       });
-
       return course;
     } catch (error) {
       console.error("Error creating course:", error);
