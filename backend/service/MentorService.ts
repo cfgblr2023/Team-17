@@ -9,6 +9,7 @@ class MentorService {
     qualification: string;
     institutionWorking: string;
     skills: { name: string }[];
+    languagesSpoken: { language: string }[];
   }) {
     const {
       name,
@@ -18,7 +19,16 @@ class MentorService {
       qualification,
       institutionWorking,
       skills,
+      languagesSpoken,
     } = mentor;
+    const dbLanguages = await prisma.language.findMany({
+      where: {
+        language: {
+          in: languagesSpoken.map((lang) => lang.language),
+        },
+      },
+    });
+
     const dbSkills = await prisma.skill.findMany({
       where: {
         name: {
@@ -56,9 +66,16 @@ class MentorService {
             id: matchedCourse.id,
           })),
         },
+        languagesSpoken: {
+          connectOrCreate: languagesSpoken.map((lang) => ({
+            where: { language: lang.language },
+            create: { language: lang.language },
+          })),
+        },
       },
       include: {
         courses: true,
+        languagesSpoken: true,
       },
     });
   }
