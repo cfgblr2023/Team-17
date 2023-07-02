@@ -1,0 +1,105 @@
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>chatbot for Canasu</h1>
+<input type="text" id="input" placeholder="Enter a word or phrase">
+<button id="button">Generate</button>
+<div id="output">output goes here</div>
+<script>
+
+button.addEventListener("click", () => {
+
+    const data ={
+        model: 'davinci',
+        prompt: '${input.value} ->',
+        //max_tokens: 100,
+        //temperature: 0.1,
+    }
+    fetch('https://api.openai.com/v1/completions',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'applications/json',
+            'Authorization': 'Bearer '
+        },
+        body: JSON.stringfy(data)
+    });
+    .then((res) => {
+        return res.json();
+    })
+    .then((data)=>{
+        console.log(data);
+        const output = data.choices[0].text;
+        document.querySelector('diy').innerHTML= '$(input.value}\n ${output}';
+    });
+})
+</script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<h1>chatbot for Canasu</h1>
+<input type="text" id="input" placeholder="Enter a word or phrase">
+<button id="button">Generate</button>
+<div id="output">output goes here</div>
+<script>
+
+const button = document.getElementById("button");
+button.addEventListener("click", () => {
+
+    const input = document.getElementById("input").value;
+    const data = {
+        model: 'davinci',
+        prompt: input + '->',
+        max_tokens: 100,
+        temperature: 0.1,
+    };
+    fetch('https://api.openai.com/v1/completions',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '
+        },
+        body: JSON.stringify(data)
+    })
+    .then((res) => {
+        return res.json();
+    })
+    .then((data) => {
+        console.log(data);
+        const output = data.choices[0].text;
+        document.getElementById('output').innerHTML = input + '<br>' + output;
+    });
+});
+</script>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <h1>Personal assistent</h1>
+  </head>
+  <body>
+    <div class="chat-container">
+      <input
+        type="text"
+        id="input"
+        placeholder="What do you want to learn about?"
+      />
+      <button id="button">Generate</button>
+      <div id="output">Response:</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

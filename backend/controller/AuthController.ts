@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { AuthService } from "../service";
-
 class AuthController {
   private authService: AuthService;
   constructor() {

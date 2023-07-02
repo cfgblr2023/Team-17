@@ -7,10 +7,12 @@ import {
   Select,
 } from "@material-ui/core";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 import logo from "../Images/logo.png";
 import api from "../http";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
@@ -30,7 +32,14 @@ function LoginPage() {
         role,
       })
       .then((res) => {
-        localStorage.setItem("user", res.data);
+        localStorage.setItem("user", JSON.stringify(res.data));
+        if (role === "mentor") {
+          navigate("/mentor");
+        } else if (role === "mentee") {
+          navigate("/mentee");
+        } else if (role === "coordinator") {
+          navigate("/coordinator");
+        }
       })
       .catch((e) => console.log(e));
 

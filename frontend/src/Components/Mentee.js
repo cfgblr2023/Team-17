@@ -1,57 +1,105 @@
-import React from 'react';
-import MenteeNav from './MenteeNav';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { Typography, Box, Grid, Link } from '@material-ui/core';
+import React from "react";
+import MenteeNav from "./MenteeNav";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { Typography, Box, Grid, Link } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import MenteeCalender from './MenteeCalender';
-import '../Components/Mentee.css';
+import MenteeCalender from "./MenteeCalender";
+import "../Components/Mentee.css";
 
 const courseInfo = {
-  courseName: 'Introduction to React',
-  mentorName: 'John Doe',
-  courseInfo: 'Learn the basics of React.js',
+  courseName: "Introduction to React",
+  mentorName: "John Doe",
+  courseInfo: "Learn the basics of React.js",
   progress: 50,
 };
 
 const useStyles = makeStyles((theme) => ({
-    box: {
-      margin: "40px",
-    }
-  }));
+  box: {
+    margin: "40px",
+  },
+  para: {
+    marginLeft: "40px",
+    marginRight: "40px",
+    marginBottom: "40px",
+  },
+}));
 
 function Mentee() {
-    const classes = useStyles();
+  const classes = useStyles();
   return (
     <div>
-    <MenteeNav />
-    <div className="cal">
-      <MenteeCalender/>
-    </div>
-    <div className="textt">
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
-        <Box bgcolor="background.paper" p={2} m={2} className={classes.box}>
-         
-          <Box m={2}>
-            <Typography variant="h4" align="left">My Course</Typography>
-            <Typography variant="body1" align="left">Course: {courseInfo.courseName}</Typography>
-            <Typography variant="body1" align="left">Mentor: {courseInfo.mentorName}</Typography>
-            <Typography variant="body1" align="left">Info: {courseInfo.courseInfo}</Typography>
-            <br />
-            <LinearProgress variant="determinate" value={courseInfo.progress} />
-            <Typography variant="body1" align="left">Progress: {courseInfo.progress}%</Typography>
-          </Box>
-        </Box>
-      </Grid>
-      <Grid item xs={6}>
-        <Box bgcolor="background.paper" p={2} m={2} className={classes.box}>
-          <Typography variant="h4" align="left">Schecule Session</Typography>
-          <Typography variant="body1" align="left">Check the calendy link of your mentor and choose a time slot.</Typography>
-          <Link href="https://calendly.com/krishnamehta12/120min" target="_blank" rel="noopener" color="primary">Calendar Link</Link>
-        </Box>
-      </Grid>
-    </Grid>
-    </div>
+      <MenteeNav />
+
+      <div className="textt">
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Box bgcolor="background.paper" p={2} m={2} className={classes.box}>
+              <Box m={2}>
+                <Typography variant="h4" align="left">
+                  My Course
+                </Typography>
+                <Typography variant="body1" align="left">
+                  Course: {courseInfo.courseName}
+                </Typography>
+                <Typography variant="body1" align="left">
+                  Mentor: {courseInfo.mentorName}
+                </Typography>
+                <Typography variant="body1" align="left">
+                  Info: {courseInfo.courseInfo}
+                </Typography>
+                <br />
+                <LinearProgress
+                  variant="determinate"
+                  value={courseInfo.progress}
+                />
+                <Typography variant="body1" align="left">
+                  Progress: {courseInfo.progress}%
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box bgcolor="background.paper" p={2} m={2} className={classes.box}>
+              <Typography variant="h4" align="left">
+                Schecule Session
+              </Typography>
+              <Typography variant="body1" align="left">
+                Check the calendy link of your mentor and choose a time slot.
+              </Typography>
+              <Link
+                href="https://calendly.com/krishnamehta12/120min"
+                target="_blank"
+                rel="noopener"
+                color="primary"
+              >
+                Calendar Link
+              </Link>
+            </Box>
+          </Grid>
+        </Grid>
+      </div>
+      <Typography variant="h4" gutterBottom>
+        Resources
+      </Typography>
+      <Typography variant="body1" gutterBottom className={classes.para}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet
+        dolor ac justo pharetra venenatis. Mauris vel risus vel sem finibus
+        posuere. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. Sed euismod, velit eget bibendum
+        lobortis, odio lorem tincidunt dolor, at bibendum sapien neque sit amet
+        elit. Aliquam erat volutpat. Sed nec eros augue. Cras eu nulla id orci
+        sagittis molestie. Nam vel justo auctor, bibendum mi id, luctus nibh.
+      </Typography>
+      <div className="cal">
+        <Typography
+          variant="h4"
+          className={classes.heading}
+          style={{ marginTop: "20px" }}
+        >
+          My Schedule
+        </Typography>
+        <MenteeCalender />
+      </div>
     </div>
   );
 }

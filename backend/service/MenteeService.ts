@@ -90,6 +90,9 @@ class MenteeService {
           },
         },
       },
+      include: {
+        skills: true,
+      },
     });
 
     if (recommendedCourses.length === 0) {
@@ -109,6 +112,7 @@ class MenteeService {
             },
           },
         },
+        include: { skills: true },
       });
     }
 

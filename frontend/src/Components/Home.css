@@ -1,0 +1,36 @@
+.chatbot-button {
+  background-color: goldenrod;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.chatbot-button:hover {
+  background-color: #0056b3;
+}
+
+.social-container {
+  margin-left: 43%;
+  display: flex;
+  justify-content: space-between;
+  width: 200px; /* Adjust the width as needed */
+}
+
+.social-container a {
+  margin-right: 10px; /* Adjust the margin value to control the spacing */
+}
+
+.background {
+  height: 50px; /* Adjust the height value as needed */
+}
+
+.root {
+  margin-bottom: 100px;
+}
+
+.imagee {
+  margin-top: 10px;
+}
