@@ -63,7 +63,7 @@ function Home() {
   };
 
   const handleRegisterClick = () => {
-    window.location.href = "/register";
+    window.location.href = "/signup";
   };
 
   const handlefbclick = () => {
